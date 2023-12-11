@@ -1,0 +1,49 @@
+<app-header></app-header>
+<div style="height: auto; margin-top: 100px;" class="container w-100  d-flex justify-content-center align-items-center flex-column">
+  <div *ngIf="!checkOutStatus" class="w-50">
+      <h1>Delivery Details</h1>
+      <form [formGroup]="checkOutForm"  class="border rounded shadow p-5 bg-dark" (ngSubmit)="proceedToBuy()">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInputname" placeholder="username"
+            name="uname" formControlName="uname">
+            <label for="floatingInputname">username</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInputflat" placeholder="Apartment / Flat No."
+            name="flat" formControlName="flat">
+            <label for="floatingInputflat">Apartment /Flat No.</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInputlocation" placeholder="Place"
+            name="place" formControlName="place">
+            <label for="floatingInputlocation">Place</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInputpin" placeholder="Pincode"
+            name="pincode" formControlName="pincode">
+            <label for="floatingInputpin">Pincode</label>
+          </div>
+          <div class="mb-3 d-flex justify-content-between">
+            <button (click)="cancel()" class="btn btn-warning">Cancel</button>
+            <button class="btn btn-success" type="submit">Proceed to Buy</button>
+          </div>
+      </form>
+  </div>
+  <!--payment-->
+  <div *ngIf="checkOutStatus" class="w-50 border rounded p-5">
+    <h1 class="mb-5">Payment Details</h1>
+    <h3>Delivery Address</h3>
+    <h5>{{checkOutForm.value.uname}}</h5>
+    <h5>{{checkOutForm.value.flat}}</h5>
+    <h5>{{checkOutForm.value.place}}</h5>
+    <h5>{{checkOutForm.value.pincode}}</h5>
+    <div class="d-flex justify-content-center mt-5 flex-column t-3">
+        <h4 class="fw-bolder">Total Amount:<span class="text-danger"> $ {{cartTotal}}</span></h4>
+        <div class="m-3">
+          <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+        </div>
+    </div>
+</div>
+</div>
+
+<app-footer></app-footer>

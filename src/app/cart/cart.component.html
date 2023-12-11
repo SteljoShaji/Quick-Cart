@@ -1,0 +1,72 @@
+<app-header></app-header>
+
+<div style="margin-top: 80px">
+    <!--wishlist without items-->
+    <div *ngIf="cart.length==0" style="height: auto;" class="d-flex justify-content-center align-items-center w-100">
+        <div >
+            <img style="height: auto;" class="img-fluid" 
+            src="https://cdn3.iconfinder.com/data/icons/shopping-and-ecommerce-29/90/empty_cart-512.png" alt="">
+            <div class="text-center">
+                <h1 class="text-danger">Your Cart Is Empty</h1>
+                <a class="btn btn-success" routerLink="">Add More Items</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- cart with items-->
+    <section *ngIf="cart.length>0" class="py-5" >
+        <div class="container px-4 px-lg-5 mt-5">
+           <div class="row">
+            <div class="col-lg-8">
+                <h2>Cart Summary</h2>
+                <table class="table shadow mt-3">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Product</th>
+                            <th>Image</th>
+                            <th>Qunatity</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of cart;let i= index;">
+                            <td>{{i+1}}</td>
+                            <td>{{product.title}}</td>
+                            <td> <img height="50px" width="50px" [src]="product.image" alt=""></td>
+                            <td>
+                                <div class="d-flex">
+                                    <button (click)="incrementQuantity(product._id)" class="btn fw-bolder fs-2">+</button>
+                                    <input class="form-control text-center" id="inputQuantity" type="num" 
+                                    [value]="product.quantity" style="max-width: 3rem" readonly>
+                                    <button (click)="decrementQuantity(product._id)" class="btn fw-bolder fs-2">-</button>
+                                </div>
+                            </td>
+                            <td>${{product.totalPrice}}</td>
+                            <td><button (click)="removeItem(product._id)" class="btn fs-1 "><i  style="height: 50px;" class="fa-solid fa-trash text-danger "></i></button></td>
+                        </tr>
+                    </tbody>
+
+                </table>
+                <div class="d-flex justify-content-end">
+                    <button (click)="emptyCart()" class="btn btn-warning me-2">Empty Cart</button>
+                    <a routerLink="" class="btn btn-success">Shop More</a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="border rounded p-3">
+                    <h4>Total: <b class="text-danger">${{cartTotalPrice}}</b></h4>
+                    <hr>
+                    <div class="d-grid">
+                        <a (click)="checkout()" class="btn btn-primary"> Check out</a>
+                    </div>
+                </div>
+            </div>
+           </div>
+        </div>
+    </section>
+</div>
+
+<app-footer></app-footer>
+

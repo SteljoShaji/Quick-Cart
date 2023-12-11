@@ -1,0 +1,32 @@
+<div style="height: 100vh;" class="d-flex w-100 justify-content-center align-items-center flex-column">
+    <a style="text-align: left;" class="btn text-primary" routerLink="">Back To Home</a>
+   <div class="row border rounded p-5 shadow">
+    <div class="col-lg-6">
+    <img class="img-fluid" src="https://cdni.iconscout.com/illustration/premium/thumb/login-here-2161443-1815085.png" alt="">
+    </div>
+    <div class="col-lg-6 ">
+        
+       <div style="height: 100%;" class="d-flex align-items-center justify-content-center flex-column">
+        <h4 class="fw-bolder">Welcome User</h4>
+            <form [formGroup]="loginForm" (ngSubmit)="login()" class="mt-4">
+                <div class="mb-3">
+                    <input style="width: 400px;" placeholder="Email Id" type="text" class="form-control" formControlName="email">
+                </div>
+                <div *ngIf="this.loginForm.get('email')?.errors && this.loginForm.get('email')?.touched"
+                class="fw-bolder text-danger mb-3">Invalid Email Id</div>
+                <div class="mb-3">
+                    <input style="width: 400px;" placeholder="Password" type="password" class="form-control "  formControlName="password">
+                </div>
+                <div *ngIf="this.loginForm.get('password')?.errors && this.loginForm.get('password')?.touched"
+                class="fw-bolder text-danger mb-3">Invalid Password</div>
+                <div class="mb-3">
+                    <input value="Login" type="submit" class="btn btn-dark">
+                </div>
+            </form>
+            <p>New User? Click here to <a routerLink="/user/register" class="" >Register</a></p>
+       </div>
+    </div>
+        
+    </div>
+    
+</div>>

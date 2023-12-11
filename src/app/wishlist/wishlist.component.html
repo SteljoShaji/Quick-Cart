@@ -1,0 +1,49 @@
+<app-header></app-header>
+
+<div style="margin-top: 80px">
+    <!--wishlist without items-->
+    <div *ngIf="wishlist.length==0" style="height: auto;" class="d-flex justify-content-center align-items-center w-100">
+        <div >
+            <img style="height: auto;" class="img-fluid" 
+            src="https://cdn3.iconfinder.com/data/icons/shopping-and-ecommerce-29/90/empty_cart-512.png" alt="">
+            <div class="text-center">
+                <h1 class="text-danger">Your Wishlist Is Empty</h1>
+                <a class="btn btn-success" routerLink="">Add More Items</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wishlist-->
+    <section *ngIf="wishlist.length>0" class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            <h1 class="text-danger mb-3">Your Wishlist...</h1>
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                <div *ngFor="let product of wishlist" class="col mb-5">
+                    <div class="card h-100 shadow ">
+                        <!-- Product image-->
+                        <img width="200px" height="200px" style="cursor: pointer;" routerLink="product/view/1" class="card-img-top  " [src]="product.image" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">{{product.title}}</h5>
+                                <!-- Product price-->
+                                ${{product.price}}
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="d-flex justify-content-between">
+                                <button (click)="removeWishlistItem(product._id)" class="btn  mt-auto" ><i style="height: 40px;" class="fa-solid fa-heart-circle-minus text-danger fa-2x"></i></button>
+                                <button class="btn  mt-auto" ><i style="height: 40px;" class="fa-solid fa-cart-plus text-success fa-2x"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<app-footer></app-footer>
+
